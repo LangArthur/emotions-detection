@@ -6,7 +6,11 @@
 # main.py
 #
 
+from src.EmotionDetector import EmotionDetector
+
 def main():
+    ed = EmotionDetector()
+    ed.run()
     return 0
 
 if __name__ == '__main__':

@@ -13,3 +13,6 @@ http://mohammadmahoor.com/affectnet/
 
 for face detection:
 https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html
+
+install opencv on rasberry pi:
+https://learnopencv.com/install-opencv-4-on-raspberry-pi/
