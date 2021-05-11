@@ -17,11 +17,11 @@ import numpy
 def loadPictures(path):
     target = []
     data = []
-    for targetFolder in os.listdir(path):
+    for i, targetFolder in enumerate(os.listdir(path)):
         for imageFile in os.listdir(os.path.join(path, targetFolder)):
             img = cv2.imread(os.path.join(path, targetFolder, imageFile), cv2.IMREAD_GRAYSCALE)
             data.append(img)
-            target.append(targetFolder)
+            target.append(i)
     return data, target
 
 # @function unionShuffle
@@ -45,4 +45,4 @@ def loadFromFile(file):
     dataTrain, targetTrain = loadPictures(os.path.join(file, "test"))
     unionShuffle(dataTrain, targetTrain)
     unionShuffle(dataTest, targetTest)
-    return dataTrain, targetTrain, dataTest, targetTest
+    return numpy.array(dataTrain), numpy.array(targetTrain), numpy.array(dataTest), numpy.array(targetTest)
