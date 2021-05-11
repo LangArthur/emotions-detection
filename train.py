@@ -13,6 +13,7 @@ from src.Models.ModelInception import ModelInception
 # launch a train session
 def train():
     dataTrain, labelTrain, dataTest, labelTest = loadFromFile("ressources/datasets/FER-2013")
+    print("Load the dataset")
     model = ModelInception()
     model.train(dataTrain, labelTrain, (dataTest, labelTest), "ressources/weights/Inception/")
     return 0
