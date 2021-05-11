@@ -48,4 +48,4 @@ class ModelInception(AModel):
         layers = Dense(1024)(layers)
         model = Model(inputLayer, layers, name="ModelInception")
         model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-        return
+        return model
