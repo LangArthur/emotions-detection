@@ -5,12 +5,12 @@
 # FaceDetector.py
 #
 
+import cv2
+
 class FaceDetector:
 
     def __init__(self):
-        pass
 
     # @method detect
     # return position of the diferent faces
     def detect(self, img):
-        pass
