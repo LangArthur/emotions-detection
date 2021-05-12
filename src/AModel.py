@@ -37,12 +37,12 @@ class AModel(ABC):
     # @param labels: labels of the corresponding data.
     # @param validationData: tuple containing data and labels for validation.
     # @param weightsFile: file where to save files.
-    def train(self, data, labels, validationData=(), weightsFile = ""):
+    def train(self, data, labels, validationData=(), epochs = 10, weightsFile = ""):
         if (weightsFile != ""):
             cpCallBack = tensorflow.keras.callbacks.ModelCheckpoint(filepath=weightsFile, save_weights_only=True, verbose=1)
-            self.model.fit(data, labels, batch_size=128, epochs = 10, validation_data=validationData, callbacks=[cpCallBack])
+            self.model.fit(data, labels, batch_size=128, epochs = epochs, validation_data=validationData, callbacks=[cpCallBack])
         else:
-            self.model.fit(data, labels, batch_size=128, epochs = 10, validation_data=validationData)
+            self.model.fit(data, labels, batch_size=128, epochs = epochs, validation_data=validationData)
 
     ## evaluate
     # evaluate the model
