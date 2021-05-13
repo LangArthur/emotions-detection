@@ -22,11 +22,11 @@ class ModelInception(AModel):
     def buildModel(self):
 
         def CNNModule(layers, filters, kernelSize, poolSize, strides):
-            layers = Conv2D(filters, kernelSize, strides=strides[0], activation="relu")(layers)
-            layers = MaxPool2D(pool_size=poolSize, strides=strides[1])(layers)
+            layers = Conv2D(filters, kernelSize, strides=strides[0], activation="relu", padding="same")(layers)
+            layers = MaxPool2D(pool_size=poolSize, strides=strides[1], padding="same")(layers)
             return layers
 
-        def InceptionModule(layers, num1x1, reduce3x3, num3x3, reduce5x5, num5x5):
+        def InceptionModule(layers, num1x1, reduce3x3, num3x3, reduce5x5, num5x5, projValue):
             conv1x1 = Conv2D(num1x1, (1, 1), activation="relu", padding="same")(layers)
 
             reduceConv3x3 = Conv2D(reduce3x3, (5, 5), activation="relu", padding="same")(layers)
@@ -35,10 +35,8 @@ class ModelInception(AModel):
             reduceConv5x5 = Conv2D(reduce3x3, (5, 5), activation="relu", padding="same")(layers)
             conv5x5 = Conv2D(num5x5, (5, 5), activation="relu", padding="same")(reduceConv5x5)
 
-            # poolProj = MaxPool2D((3, 3), strides=2)(layers)
-            # proj = Lambda(lambda x: [:, projPool])
-            # poolProj = proj(poolProj)
-            # poolProj = Conv2D(1, kernel_size=(1, 1))(poolProj)
+            poolProj = MaxPool2D((3, 3), strides=2, padding="same")(layers)
+            poolProj = Conv2D(projValue, kernel_size=(1, 1), padding="same")(poolProj)
 
             layers = concatenate([conv1x1, conv3x3, conv5x5])
             return layers
@@ -47,14 +45,14 @@ class ModelInception(AModel):
 
         inputLayer = Input(shape=inputShape)
         layers = CNNModule(inputLayer, 64, (7, 7), (3, 3), (2, 2))
-        # layers = CNNModule(layers, 192, (3, 3), (3, 3), (1, 2))
-        # layers = InceptionModule(layers, 64, 96, 128, 16, 32)
-        # layers = InceptionModule(layers, 128, 128, 192, 32, 96)
-        # layers = MaxPool2D((3, 3), strides=2)(layers)
-        # layers = InceptionModule(layers, 192, 96, 208, 16, 48)
-        # layers = AveragePooling2D((1, 1), strides=2)(layers)
-        # layers = Dense(4096)(layers)
-        # layers = Dense(1024)(layers)
+        layers = CNNModule(layers, 192, (3, 3), (3, 3), (1, 2))
+        layers = InceptionModule(layers, 64, 96, 128, 16, 32, 32)
+        layers = InceptionModule(layers, 128, 128, 192, 32, 96, 64)
+        layers = MaxPool2D((3, 3), strides=2, padding="same")(layers)
+        layers = InceptionModule(layers, 192, 96, 208, 16, 48, 64)
+        layers = AveragePooling2D((3, 3), padding="same")(layers)
+        layers = Dense(4096)(layers)
+        layers = Dense(1024)(layers)
         model = Model(inputLayer, layers, name="ModelInception")
         model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
         return model
