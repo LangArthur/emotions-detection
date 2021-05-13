@@ -45,4 +45,4 @@ def loadFromFile(file):
     dataTrain, targetTrain = loadPictures(os.path.join(file, "test"))
     unionShuffle(dataTrain, targetTrain)
     unionShuffle(dataTest, targetTest)
-    return numpy.array(dataTrain), numpy.array(targetTrain), numpy.array(dataTest), numpy.array(targetTest)
+    return numpy.reshape(dataTrain, (len(dataTrain), 48, 48, 1)), numpy.array(targetTrain), numpy.reshape(dataTest, (len(dataTest), 48, 48, 1)), numpy.array(targetTest)
