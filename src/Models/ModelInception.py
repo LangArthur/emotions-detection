@@ -21,7 +21,7 @@ class ModelInception(AModel):
 
     def buildModel(self):
 
-        def CNNModule(layers, filters, kernelSize, strides, poolSize):
+        def CNNModule(layers, filters, kernelSize, poolSize, strides):
             layers = Conv2D(filters, kernelSize, strides=strides[0], activation="relu")(layers)
             layers = MaxPool2D(pool_size=poolSize, strides=strides[1])(layers)
             return layers
@@ -47,7 +47,7 @@ class ModelInception(AModel):
 
         inputLayer = Input(shape=inputShape)
         layers = CNNModule(inputLayer, 64, (7, 7), (3, 3), (2, 2))
-        # layers = CNNModule(layers, 192, (3, 3), (3, 3), (1, 2))
+        layers = CNNModule(layers, 192, (3, 3), (3, 3), (1, 2))
         layers = InceptionModule(layers, 64, 96, 128, 16, 32)
         layers = InceptionModule(layers, 128, 128, 192, 32, 96)
         layers = MaxPool2D((3, 3), strides=2)(layers)
