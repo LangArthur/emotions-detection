@@ -24,26 +24,10 @@ def train():
     model = ModelInception()
     model.train(dataTrain, labelTrain, (dataTest, labelTest), 150, "ressources/weights/Inception/")
     return 0
-    # dataTrain, labelTrain, dataTest, labelTest = loadFromFile("/colabdrive/EmotionDetection/emotions-detection/ressources/datasets/EmotionDataset")
-    # print("Load the dataset")
-    # model = SimpleCNN()
-    # model.train(dataTrain, labelTrain, (dataTest, labelTest), epochs=150, batch_size=50)
-    # return 0
-
-def load_model(path, modelName):
-    dataTrain, labelTrain, dataTest, labelTest = loadFromFile("/colabdrive/EmotionDetection/emotions-detection/ressources/datasets/EmotionDataset")
-    if modelName=='Inception':
-        model=ModelInception().buildModel()
-    elif modelName=='SimpleCNN':
-        model=SimpleCNN().buildModel() 
-    model.load_weights(path)
-    return model
 
 
 if __name__ == '__main__':
     train()
-    # model=load_model("ressources/weights/SimpleCNN/", "SimpleCNN")
-    # model.summary()
     # dataTrain, labelTrain, dataTest, labelTest = load_dataset("/colabdrive/EmotionDetection/emotions-detection/ressources/datasets/EmotionDataset")
     dataTest, labelTest = load_dataset("/colabdrive/EmotionDetection/emotions-detection/ressources/datasets/EmotionDataset")
     labelEncoder =preprocessing.LabelEncoder()
@@ -57,15 +41,8 @@ if __name__ == '__main__':
     # print("ok")
     # # model=SimpleCNN()
     # # model.train()
-    # model=SimpleCNN()
-    # model.train(dataTrain, labelTrain1, (dataTest, labelTest1), 150)
-    # model.save("/colabdrive/EmotionDetection/emotions-detection/src/Models/SimpleCNNSaved/1")
-    model = keras.models.load_model("/colabdrive/EmotionDetection/emotions-detection/src/Models/SimpleCNNSaved/1")
-    model.summary()
-    model.evaluate(dataTest, labelTest1)
-    
-    # print(labelTrain1)
-    # print("ok")
-    # model.load_weights("ressources/weights/SimpleCNN/")
-    # model.evaluate(dataTest, labelTest)
-    # model.summary()
+    model=SimpleCNN()
+    model.train(dataTrain, labelTrain, (dataTest, labelTest), 150)
+    model.save("/colabdrive/EmotionDetection/emotions-detection/src/Models/SimpleCNNSaved/LoadFromFileMethod")
+
+
