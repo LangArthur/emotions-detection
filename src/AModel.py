@@ -45,9 +45,25 @@ class AModel(ABC):
             self.model.fit(data, labels, batch_size=128, epochs = epochs, validation_data=validationData)
 
     ## evaluate
-    # evaluate the model
+    # evaluate the model on test dataset
+    # @param testData: the data you want to make prediction on
+    # @param testLabel: label of the data on which predictions are made
+    # @return a tuple with loss_val and accuracy
     def evaluate(self, testData, testLabel):
         return self.model.evaluate(testData, testLabel)
+
+    ## save
+    # save the model in the specified path
+    # @param path: path where the model will be saved
+    def save(self, path):
+        self.model.save(path)
+    
+    ## load_model
+    # load the model from the specified path
+    # @param path: path from where the model will be loaded
+    # @return the loaded model
+    def load_model(self, pah):
+        return self.model.load_model(path)
 
     ## predict
     # to a prediction on a set of data
