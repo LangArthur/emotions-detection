@@ -5,7 +5,10 @@
 # Arthur Lang
 # train.py
 #
+
+#%%
 import os.path
+from cv2 import cv2
 from os import path
 import tensorflow
 import numpy
@@ -15,35 +18,33 @@ from src.Models.ModelInception import ModelInception
 from src.Models.SimpleCNN import SimpleCNN
 from src import AModel
 from tensorflow import keras
+import matplotlib.pyplot as plt
 
 
 # @function trainpip install keras
 # launch a train session
-def train():
-    dataTrain, labelTrain, dataTest, labelTest = loadFromFile("ressources/datasets/FER-2013")
-    print("Load the dataset")
-    model = ModelInception()
-    model.train(dataTrain, labelTrain, (dataTest, labelTest), 150, "ressources/weights/Inception/")
+def train(modelName):
+    availableModels = {
+        "inception": ModelInception,
+        "cnn": SimpleCNN,
+    }
+    model = availableModels[modelName]()
+    dataTrain, labelTrain, dataTest, labelTest = loadFromFile("/colabdrive/emotions-detection/ressources/datasets/EmotionsDataset")
+    print("ok")
+    model.train(dataTrain, labelTrain, (dataTest, labelTest), 150)
+    model.save("/colabdrive/emotions-detection/src/Models")
     return 0
 
 
 if __name__ == '__main__':
-    # train()
-    # dataTrain, labelTrain, dataTest, labelTest = load_dataset("/colabdrive/EmotionDetection/emotions-detection/ressources/datasets/EmotionDataset")
-    # dataTrain, labelTrain,dataTest, labelTest = loadFromFile("/colabdrive/emotions-detection/ressources/datasets/EmotionsDataset")
-    # # labelTrain1=numpy.zeros(len(labelTrain))
-    # labelTest1=numpy.zeros(len(labelTest))
-    # print("ok")
-    # # model=SimpleCNN()
-    # # model.train()
-    # model=AModel()
-    # model.train(dataTrain, labelTrain, (dataTest, labelTest), 100)
-    # model.save("/colabdrive/EmotionDetection/emotions-detection/src/Models/SimpleCNNSaved/LoadFromFileMethod")
-    # model=SimpleCNN()
-    # model =keras.models.load_model("/colabdrive/EmotionDetection/emotions-detection/src/Models/SimpleCNNSaved/LoadFromFileMethod")
-    # model.summary()
-    # print(model.evaluate(dataTest, labelTest))
-    converter = tensorflow.lite.TFLiteConverter.from_saved_model("/colabdrive/EmotionDetection/emotions-detection/src/Models/SimpleCNNSaved/LoadFromFileMethod") # path to the SavedModel directory
-    tflite_model = converter.convert()
-    with open('/colabdrive/emotions-detection/src/Models/model.tflite', 'wb') as f:
-        f.write(tflite_model)
+    # train("cnn")
+
+    model = keras.models.load_model("/colabdrive/emotions-detection/src/Models/SimpleCNN/LoadFromFileMethod")
+    img = cv2.imread('/colabdrive/emotions-detection/ressources/datasets/EmotionsDataset/test/angry/PrivateTest_88305.jpg', cv2.IMREAD_GRAYSCALE)/255.0
+    img_reshaped =numpy.reshape(img, (1,48,48,1))
+    print(numpy.argmax(model.predict(img_reshaped)))
+    print("ok")
+    cv2.imshow("test", img)
+    print("ok")
+    # imgplot = plt.imshow(img)
+# %%
