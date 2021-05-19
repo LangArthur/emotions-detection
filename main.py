@@ -21,12 +21,12 @@ def checkParameters(parameters):
 
 def main():
     av = sys.argv
-        if (checkParameters(av)):
+    if (checkParameters(av)):
             ed = EmotionDetector(modelName=av[1])
             ed.run()
-        else:
+    else:
             displayHelp()
-        return 0
+    return 0
     
     return 0
 
