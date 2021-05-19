@@ -23,7 +23,7 @@ python main.py nameOfTheModel
 
 
 
-Datasets:
+## Datasets:
 1. https://www.kaggle.com/msambare/fer2013
 
 
@@ -32,11 +32,11 @@ http://vis-www.cs.umass.edu/lfw/
 http://vision.ucsd.edu/~iskwak/ExtYaleDatabase/ExtYaleB.html -> this one seems good !
 http://mohammadmahoor.com/affectnet/
 
-for face detection:
+## Face detection:
 https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html
 
-install opencv on rasberry pi:
+## Install opencv on Rasberry Pi:
 https://learnopencv.com/install-opencv-4-on-raspberry-pi/
 
-Resources:
+## References:
 [1]A. Mollahosseini, D. Chan and M. H. Mahoor, "Going deeper in facial expression recognition using deep neural networks," 2016 IEEE Winter Conference on Applications of Computer Vision (WACV), 2016, pp. 1-10, doi: 10.1109/WACV.2016.7477450.
