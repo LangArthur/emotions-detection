@@ -40,9 +40,9 @@ class AModel(ABC):
     def train(self, data, labels, validationData=(), epochs = 10, weightsFile = ""):
         if (weightsFile != ""):
             cpCallBack = tensorflow.keras.callbacks.ModelCheckpoint(filepath=weightsFile, save_weights_only=True, verbose=1)
-            self.model.fit(data, labels, batch_size=128, epochs = epochs, validation_data=validationData, callbacks=[cpCallBack])
+            self.model.fit(data, labels, batch_size=70, epochs = epochs, validation_data=validationData, callbacks=[cpCallBack])
         else:
-            self.model.fit(data, labels, batch_size=128, epochs = epochs, validation_data=validationData)
+            self.model.fit(data, labels, batch_size=70, epochs = epochs, validation_data=validationData)
 
     ## evaluate
     # evaluate the model on test dataset
@@ -62,7 +62,7 @@ class AModel(ABC):
     # load the model from the specified path
     # @param path: path from where the model will be loaded
     # @return the loaded model
-    def load_model(self, pah):
+    def load_model(self, path):
         return self.model.load_model(path)
 
     ## predict

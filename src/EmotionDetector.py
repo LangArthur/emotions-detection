@@ -5,7 +5,7 @@
 # EmotionDetector.py
 #
 
-import cv2
+from cv2 import cv2
 import ntpath
 
 def getFileName(path):
