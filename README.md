@@ -5,7 +5,7 @@ The program detects different emotions of a person from video stream/images.
 This project has an educational purpose.
 
 # Models used for emotions detection
-For this task, three architectures were implemented. 
+For this task, three architectures were implemented: 
 1. ModelInception - inspired from article [1].
 2. SimpleCNN - model base on the implementation of https://github.com/MinG822/ferpredict3.
 3. CNNv2 - model base on the implementation of https://github.com/atulapra/Emotion-detection.
@@ -35,7 +35,7 @@ http://mohammadmahoor.com/affectnet/
 ## Face detection:
 https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_objdetect/py_face_detection/py_face_detection.html
 
-## Install opencv on Rasberry Pi:
+## Install OpenCV on Rasberry Pi:
 https://learnopencv.com/install-opencv-4-on-raspberry-pi/
 
 ## References:
