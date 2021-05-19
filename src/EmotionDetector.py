@@ -5,10 +5,10 @@
 # EmotionDetector.py
 #
 
-from cv2 import cv2
 import ntpath
-from tensorflow import keras
 import numpy
+
+from cv2 import cv2
 
 def getFileName(path):
     head, tail = ntpath.split(path)
@@ -16,25 +16,36 @@ def getFileName(path):
 
 class EmotionDetector():
 
-    def __init__(self, path=""):
+    def __init__(self, path="", modelName="cnnv2"):
         self.title = "Emotion detector - "
         self.title += " webcam" if path == "" else getFileName(path)
         self._cap = cv2.VideoCapture(0 if path == "" else path)
         self.isRunning = True
+        self.availableModels = {
+        "Inception": 'src/Models/ModelInception.py',
+        "SimpleCNN": 'src/Models/SimpleCNN.py',
+        "CNNv2":'src/Models/CNNv2.py'
+        }
         self.faceClassifier = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
         self.emotions = ["anger","disgust","fear","happiness", "neutral", "sadness","surprise"]
-        self.model= keras.models.load_model("src\Models\Cnnv2\Cnnv2")
+        self.model= keras.models.load_model(self.availableModels[modelName])
         
-
-    def drawFace(self, img, faces,gray):
+    ## drawFace
+    # draw a rectangle around the face detected in an image and uses face area for making predictions regarding the emotion. The detected emotion is displayed on the frame.
+    # @param frame: frame sample retrieved from the video capture
+    # @param faces: detected feature of the face returned by cv2.CascadeClassifier 
+    # @param grayFrame: gray version of the frame
+    def drawFace(self, frame, faces,grayFrame):
         for (x, y, w, h) in faces:
-            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            roiGray=gray[y:y + h, x:x + w]
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            roiGray=grayFrame[y:y + h, x:x + w]
             roiGray=roiGray/255.0
             cropped_img = numpy.expand_dims(numpy.expand_dims(cv2.resize(roiGray, (48, 48)), -1), 0)
             prediction=numpy.argmax(self.model.predict(cropped_img))
-            cv2.putText(img, str(self.emotions[prediction]), (x + 6, y - 6), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 1)
+            cv2.putText(frame, str(self.emotions[prediction]), (x + 6, y - 6), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), 1)
 
+    ## run
+    # Runs the algorithm for predicting the emotion using images from webcam
     def run(self):
         while (self.isRunning):
             ret, frame = self._cap.read()

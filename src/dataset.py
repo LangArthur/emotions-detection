@@ -7,8 +7,9 @@
 #
 
 import os
-from cv2 import cv2
 import numpy
+
+from cv2 import cv2
 
 # @function loadPictures
 # load pictures from a folder. This folder should contain folders with classes name.
