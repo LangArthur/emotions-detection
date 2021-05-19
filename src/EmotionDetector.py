@@ -44,5 +44,3 @@ class EmotionDetector():
             cv2.imshow(self.title, frame)
             if (cv2.waitKey(1) & 0xFF == ord('q')):
                 self.isRunning = False
-E=EmotionDetector()
-E.run()
