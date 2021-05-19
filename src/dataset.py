@@ -7,7 +7,7 @@
 #
 
 import os
-import cv2
+from cv2 import cv2
 import numpy
 
 # @function loadPictures
@@ -20,6 +20,7 @@ def loadPictures(path):
     for i, targetFolder in enumerate(os.listdir(path)):
         for imageFile in os.listdir(os.path.join(path, targetFolder)):
             img = cv2.imread(os.path.join(path, targetFolder, imageFile), cv2.IMREAD_GRAYSCALE)/255.0
+            print(os.path.join(path, targetFolder))
             data.append(img)
             target.append(i)
     return data, target
@@ -41,8 +42,8 @@ def unionShuffle(a, b):
 # @return the dataset
 def loadFromFile(file):
     dataTrain = targetTrain = dataTest = targetTest = []
-    dataTrain, targetTrain = loadPictures(os.path.join(file, "train"))
     dataTest, targetTest = loadPictures(os.path.join(file, "test"))
+    dataTrain, targetTrain = loadPictures(os.path.join(file, "train"))
     unionShuffle(dataTrain, targetTrain)
     unionShuffle(dataTest, targetTest)
     return numpy.reshape(dataTrain, (len(dataTrain), 48, 48, 1)), numpy.array(targetTrain), numpy.reshape(dataTest, (len(dataTest), 48, 48, 1)), numpy.array(targetTest)

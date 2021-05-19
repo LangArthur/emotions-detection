@@ -41,6 +41,6 @@ class EmotionDetector():
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = self.faceClassifier.detectMultiScale(gray, 1.3, 5)
             self.drawFace(frame, faces, gray)
-            cv2.imshow(self.title, frame)
+            cv2.imshow(self.title, frame, cv2.resize(frame,(1600,960),interpolation = cv2.INTER_CUBIC))
             if (cv2.waitKey(1) & 0xFF == ord('q')):
                 self.isRunning = False
