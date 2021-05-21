@@ -6,9 +6,9 @@
 #
 
 import ntpath
+import keras
 import numpy
-
-from cv2 import cv2
+import cv2
 
 def getFileName(path):
     head, tail = ntpath.split(path)
@@ -16,15 +16,15 @@ def getFileName(path):
 
 class EmotionDetector():
 
-    def __init__(self, path="", modelName="cnnv2"):
+    def __init__(self, path="", modelName="CNNv2"):
         self.title = "Emotion detector - "
         self.title += " webcam" if path == "" else getFileName(path)
         self._cap = cv2.VideoCapture(0 if path == "" else path)
         self.isRunning = True
         self.availableModels = {
-        "Inception": 'src/Models/ModelInception.py',
-        "SimpleCNN": 'src/Models/SimpleCNN.py',
-        "CNNv2":'src/Models/CNNv2.py'
+        "Inception": '',
+        "SimpleCNN": 'ressources/Models/SimpleCNNTrained/LoadFromFileMethod',
+        "CNNv2":'ressources/Models/Cnnv2-70batch-50epochs'
         }
         self.faceClassifier = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
         self.emotions = ["anger","disgust","fear","happiness", "neutral", "sadness","surprise"]
@@ -52,6 +52,6 @@ class EmotionDetector():
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = self.faceClassifier.detectMultiScale(gray, 1.3, 5)
             self.drawFace(frame, faces, gray)
-            cv2.imshow(self.title, frame, cv2.resize(frame,(1600,960),interpolation = cv2.INTER_CUBIC))
+            cv2.imshow(self.title, cv2.resize(frame,(1600,960),interpolation = cv2.INTER_CUBIC))
             if (cv2.waitKey(1) & 0xFF == ord('q')):
                 self.isRunning = False
