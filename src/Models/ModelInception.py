@@ -6,6 +6,7 @@
 #
 
 import numpy
+
 from src.AModel import AModel
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Conv2D, BatchNormalization, Activation, concatenate, Input, MaxPool2D, Dense, Reshape, AveragePooling2D, Lambda
@@ -55,4 +56,5 @@ class ModelInception(AModel):
         layers = Dense(1024)(layers)
         model = Model(inputLayer, layers, name="ModelInception")
         model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+        
         return model

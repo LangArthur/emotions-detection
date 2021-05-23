@@ -6,6 +6,7 @@
 #
 
 import numpy
+
 from src.AModel import AModel
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, Dropout, MaxPooling2D, Flatten, Dense
@@ -41,4 +42,5 @@ class SimpleCNN(AModel):
         model.add(Dropout(0.4))
         model.add(Dense(7, activation='softmax'))
         model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+        
         return model

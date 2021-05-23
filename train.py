@@ -24,7 +24,7 @@ def train(modelName):
     dataTrain, labelTrain, dataTest, labelTest = loadFromFile("/colabdrive/emotions-detection/ressources/datasets/EmotionsDataset")
     print("ok")
     model.train(dataTrain, labelTrain, (dataTest, labelTest), 50)
-    model.save("/colabdrive/emotions-detection/src/Models/")
+    model.save("/colabdrive/emotions-detection/src/Models/Cnnv2-70batch-50epochs")
     return 0
 
 

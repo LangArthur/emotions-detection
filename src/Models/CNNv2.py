@@ -31,4 +31,5 @@ class CNNv2(AModel):
         model.add(Dense(7, activation='softmax'))
 
         model.compile(loss='sparse_categorical_crossentropy',optimizer=Adam(lr=0.0001, decay=1e-6),metrics=['accuracy'])
+        
         return model

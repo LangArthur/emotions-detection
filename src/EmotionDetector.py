@@ -23,7 +23,7 @@ class EmotionDetector():
         self.isRunning = True
         self.availableModels = {
         "Inception": '',
-        "SimpleCNN": 'ressources/Models/SimpleCNNTrained/LoadFromFileMethod',
+        "SimpleCNN": 'ressources/Models/SimpleCNNTrained',
         "CNNv2":'ressources/Models/Cnnv2-70batch-50epochs'
         }
         self.faceClassifier = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
