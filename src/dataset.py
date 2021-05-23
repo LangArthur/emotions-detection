@@ -21,7 +21,6 @@ def loadPictures(path):
     for i, targetFolder in enumerate(os.listdir(path)):
         for imageFile in os.listdir(os.path.join(path, targetFolder)):
             img = cv2.imread(os.path.join(path, targetFolder, imageFile), cv2.IMREAD_GRAYSCALE)/255.0
-            print(os.path.join(path, targetFolder))
             data.append(img)
             target.append(i)
     return data, target
