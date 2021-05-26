@@ -18,11 +18,9 @@ def checkParameters(parameters):
 def main():
     av = sys.argv
     if (checkParameters(av)):
-            ed = EmotionDetector(modelName=av[1])
-            ed.run()
-    else:
-            ed = EmotionDetector()
-            ed.run()
+        path = av[2] if len(av) == 3 else ""
+        ed = EmotionDetector(modelName=av[1], path=path, demo=True)
+        ed.run()
     return 0
     
 
