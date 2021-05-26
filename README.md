@@ -1,6 +1,6 @@
 # Emotion-detection
 
-The program detects different emotions of a person from video stream/images.
+The program detects different emotions of a person from video stream / file.
 
 This project has an educational purpose.
 
@@ -14,13 +14,13 @@ pip install -r requirements.txt
 
 ## Run the program
 
-It is possible to simply run the programm with default config (make sure he can access you laptop's camera):
+It is possible to simply run the program with default config (make sure he can access you laptop's camera):
 
 ```
 main.py
 ```
 
-Several option are available:
+Several options are available:
 
 ```
 usage: main.py [-h] [-s] [-f FILE] [-m {Inception,SimpleCNN,CNNv2}]
@@ -43,9 +43,7 @@ In this project, three architectures were implemented:
 2. SimpleCNN - model base on [this implementation](https://github.com/MinG822/ferpredict3).
 3. CNNv2 - model base on [this implementation](https://github.com/atulapra/Emotion-detection).
 
-The best performances were reached using CNNv2 model trained on [FER-2013 dataset](https://www.kaggle.com/msambare/fer2013). The program uses this model by defalt when running, but the model can be changed by specifying the model name on command line (available models: 'Inception', 'SimpleCNN', 'CNNv2')
-
-Note that it is the once that was conpress to TFLite model.
+The best performances was reached using CNNv2 model trained on [FER-2013 dataset](https://www.kaggle.com/msambare/fer2013). Note that it is the once that was conpress to TFLite model. The program uses this model by defalt when running, but the model can be changed by specifying the model name on command line (see run the program part)
 
 ## References:
 
