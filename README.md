@@ -25,12 +25,12 @@ Several option are available:
 ```
 usage: main.py [-h] [-s] [-f FILE] [-m {Inception,SimpleCNN,CNNv2}]
 
-Run emotion detection on stream of image. Different input can be take.
+Run emotion detection on stream of image. Different input can be taken.
 
 optional arguments:
   -h, --help            show this help message and exit
-  -s, --screen          use the screen as input
-  -f FILE, --file FILE  Specify a file as input dispite of the webcam.
+  -s, --screen          use the screen as input.
+  -f FILE, --file FILE  Specify a file as input.
   -m {Inception,SimpleCNN,CNNv2}, --model {Inception,SimpleCNN,CNNv2}
                         specify a model to use. Model availables are Inception, SimpleCNN and CNNv2.
 ```
