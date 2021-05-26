@@ -15,8 +15,8 @@ def main():
     parser = argparse.ArgumentParser(description="Run emotion detection on stream of image. Different input can be take.")
     # add flag gestion
     parser.add_argument("-s", "--screen", help="use the screen as input", action="store_true")
-    parser.add_argument("-m", "--model", help="specify a model to use. Model availables are Inception, SimpleCNN and CNNv2.", type=str, choices=["Inception", "SimpleCNN", "CNNv2"], default="CNNv2")
     parser.add_argument("-f", "--file", help="Specify a file as input dispite of the webcam.", type=str, default="")
+    parser.add_argument("-m", "--model", help="specify a model to use. Model availables are Inception, SimpleCNN and CNNv2.", type=str, choices=["Inception", "SimpleCNN", "CNNv2"], default="CNNv2")
     args = parser.parse_args()
     if args.file and args.screen:
         print("{}: error: -s and -f are incompatible".format(__file__))

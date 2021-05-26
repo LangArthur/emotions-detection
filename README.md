@@ -14,10 +14,26 @@ pip install -r requirements.txt
 
 ## Run the program
 
-### Default mode (CNNv2 model for detection)
-python main.py
-### Changing the model for detection
-python main.py nameOfTheModel
+It is possible to simply run the programm with default config (make sure he can access you laptop's camera):
+
+```
+main.py
+```
+
+Several option are available:
+
+```
+usage: main.py [-h] [-s] [-f FILE] [-m {Inception,SimpleCNN,CNNv2}]
+
+Run emotion detection on stream of image. Different input can be take.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s, --screen          use the screen as input
+  -f FILE, --file FILE  Specify a file as input dispite of the webcam.
+  -m {Inception,SimpleCNN,CNNv2}, --model {Inception,SimpleCNN,CNNv2}
+                        specify a model to use. Model availables are Inception, SimpleCNN and CNNv2.
+```
 
 ## Model availables
 
@@ -28,6 +44,8 @@ In this project, three architectures were implemented:
 3. CNNv2 - model base on [this implementation](https://github.com/atulapra/Emotion-detection).
 
 The best performances were reached using CNNv2 model trained on [FER-2013 dataset](https://www.kaggle.com/msambare/fer2013). The program uses this model by defalt when running, but the model can be changed by specifying the model name on command line (available models: 'Inception', 'SimpleCNN', 'CNNv2')
+
+Note that it is the once that was conpress to TFLite model.
 
 ## References:
 
