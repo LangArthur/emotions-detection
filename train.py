@@ -12,7 +12,7 @@ from src.Models.SimpleCNN import SimpleCNN
 from src.Models.CNNv2 import CNNv2
 from src import AModel
 
-# @function trainpip install keras
+# @function train
 # launch a training session
 def train(modelName):
     availableModels = {
