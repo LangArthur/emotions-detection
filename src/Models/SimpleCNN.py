@@ -16,8 +16,8 @@ from tensorflow.keras.regularizers import l2
 # model base on the implementation of https://github.com/MinG822/ferpredict3
 class SimpleCNN(AModel):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, weightPath = None, modelPath = None):
+        super().__init__(weightPath, modelPath)
 
     def buildModel(self):
         model = Sequential()

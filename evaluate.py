@@ -16,7 +16,7 @@ import numpy
 import matplotlib.pyplot as plt
 import seaborn
 from sklearn.model_selection import KFold
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_score, recall_score
 
 from src.dataset import loadFromFile
 
@@ -91,6 +91,12 @@ def litePrediction(modelPath, testData):
     print(f"Prediction time for an image: {duration} seconds")
     return prediction
 
+def scoring(pred, reality):
+    print("\nScoring:")
+    print("Accuracy: {}".format(accuracy_score(pred, reality)))
+    print("Recall: {}".format(recall_score(pred, reality, average="micro", zero_division=0)))
+    print("Precision: {}\n".format(precision_score(pred, reality, average="micro")))
+
 # @function evaluate
 # evaluate a model
 def evaluate():
@@ -104,10 +110,10 @@ def evaluate():
 
     if (args.lite):
         prediction = litePrediction(args.model, testData)
-        print(prediction)
     else:
         model = keras.models.load_model(args.model)
         prediction = numpy.argmax(model.predict(testData), axis=1)
+    scoring(prediction, testLabels)
     displayConfusionMatrix(confusion_matrix(testLabels, prediction))
 
 if __name__ == "__main__":

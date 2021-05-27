@@ -17,8 +17,8 @@ from tensorflow.keras.layers import Conv2D, BatchNormalization, Activation, conc
 # in 2016 IEEE Winter Conference on Applications of Computer Vision (WACV), mars 2016, p. 1‐10, doi: 10.1109/WACV.2016.7477450.
 class ModelInception(AModel):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, weightPath = None, modelPath = None):
+        super().__init__(weightPath, modelPath)
 
     def buildModel(self):
 

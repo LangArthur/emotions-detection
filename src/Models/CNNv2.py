@@ -8,8 +8,8 @@ from tensorflow.keras.layers import Conv2D, Dropout, MaxPooling2D, Flatten, Dens
 # model base on the implementation of https://github.com/atulapra/Emotion-detection
 class CNNv2(AModel):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, weightPath = None, modelPath = None):
+        super().__init__(weightPath, modelPath)
 
     def buildModel(self):
         model = Sequential()
